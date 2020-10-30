@@ -1,0 +1,103 @@
+#!/usr/bin/env node
+"use strict";
+
+const readlineSync = require("readline-sync");
+const Score = require("./lib/scoreboard");
+const Question = require("./lib/question");
+const MAX_SCORE = 400;
+const MESSAGES = require("./config/trivia_messages.json");
+
+const promptMenu = () => {
+  let options = ["Start Trivia", "View Questions"];
+  let index = readlineSync
+    .keyInSelect(options, MESSAGES.menuChoice, {
+      cancel: "EXIT"
+    });
+  return index;
+};
+
+const promptAnswer = (question) => {
+  let playerChoice = readlineSync.keyIn(MESSAGES.chooseAnswer, {
+    limit: `$<1-${question.getChoices().length}>`
+  });
+  console.clear();
+  return playerChoice;
+};
+
+const promptNextQuestion = () => {
+  return readlineSync.keyInYNStrict(MESSAGES.continueRound);
+};
+
+const updatePlayerStats = (score, question, playerChoice) => {
+  if (question.isCorrectAnswer(playerChoice)) {
+    score.incrementPlayerScore();
+    score.incrementPlayerCorrectCount();
+  } else {
+    score.incrementPlayerIncorrectCount();
+  }
+};
+
+const checkAnswer = (question, playerChoice) => {
+  console.log(`The correct answer was: ${question.getCurrCorrect()}`);
+  console.log(`You chose: ${question.getChosenAnswer(playerChoice)}\n`);
+  if (question.isCorrectAnswer(playerChoice)) {
+    console.log(MESSAGES.correctAnswer);
+  } else {
+    console.log(MESSAGES.incorrectAnswer);
+  }
+};
+
+const displayPlayerStats = (score) => {
+  let stats = score.getPlayerStats();
+  console.log(`\n${MESSAGES.results}`);
+  console.log(`Answered incorrect: ${stats.playerIncorrectCount}`);
+  console.log(`Answered correct: ${stats.playerCorrectCount}`);
+  console.log(`Total score: ${stats.playerScore}\n`);
+};
+
+const displayEndRound = (score) => {
+  let stats = score.getPlayerStats();
+  console.log(`\n${MESSAGES.roundOver}\n`);
+  if (stats.playerScore === MAX_SCORE) {
+    console.log(MESSAGES.perfectScore);
+  }
+}
+
+const startRound = () => {
+  let count = 1;
+  let question = new Question();
+  let score = new Score();
+
+  while (count <= 10) {
+    console.clear();
+    question.displayNextQuestion();
+    let playerChoice = promptAnswer(question);
+    checkAnswer(question, playerChoice);
+    updatePlayerStats(score, question, playerChoice);
+    displayPlayerStats(score);
+
+    if (count === 10 || !promptNextQuestion()) break;
+    question.nextQuestion();
+    count += 1;
+  }
+
+  displayEndRound(score);
+};
+
+let running = true;
+console.clear();
+console.log(MESSAGES.welcome);
+
+while (running) {
+  let choice = promptMenu();
+  if (choice === 0) {
+    startRound();
+  } else if (choice === 1) {
+    console.clear();
+    (new Question()).displayAllQuestions();
+  } else {
+    console.clear();
+    console.log(MESSAGES.goodbye);
+    running = false;
+  }
+}

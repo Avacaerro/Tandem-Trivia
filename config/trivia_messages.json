@@ -1,0 +1,12 @@
+{
+  "welcome": "Welcome to Tandem Trivia!",
+  "roundOver": "***********Round Over***********",
+  "continueRound": "Would you like to continue to the next question? ",
+  "correctAnswer": "You got it right!",
+  "incorrectAnswer": "You got it wrong!",
+  "results": "Here's your results...",
+  "chooseAnswer": "Choose answer: ",
+  "perfectScore": "Great job! You got a perfect score!",
+  "goodbye": "Thanks for playing Tandem Trivia!",
+  "menuChoice": "What would you like to do?"
+}

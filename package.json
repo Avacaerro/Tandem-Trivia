@@ -1,0 +1,21 @@
+{
+  "name": "tandem_apprentice_challenge_2020",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.1",
+    "jest": "^26.6.1"
+  }
+}
