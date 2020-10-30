@@ -28,15 +28,6 @@ const promptNextQuestion = () => {
   return readlineSync.keyInYNStrict(MESSAGES.continueRound);
 };
 
-const updatePlayerStats = (score, question, playerChoice) => {
-  if (question.isCorrectAnswer(playerChoice)) {
-    score.incrementPlayerScore();
-    score.incrementPlayerCorrectCount();
-  } else {
-    score.incrementPlayerIncorrectCount();
-  }
-};
-
 const checkAnswer = (question, playerChoice) => {
   console.log(`The correct answer was: ${question.getCurrCorrect()}`);
   console.log(`You chose: ${question.getChosenAnswer(playerChoice)}\n`);
@@ -44,6 +35,15 @@ const checkAnswer = (question, playerChoice) => {
     console.log(MESSAGES.correctAnswer);
   } else {
     console.log(MESSAGES.incorrectAnswer);
+  }
+};
+
+const updatePlayerStats = (score, question, playerChoice) => {
+  if (question.isCorrectAnswer(playerChoice)) {
+    score.incrementPlayerScore();
+    score.incrementPlayerCorrectCount();
+  } else {
+    score.incrementPlayerIncorrectCount();
   }
 };
 
