@@ -1,6 +1,13 @@
 # Tandem Trivia
 A simple trivia game based command-line application. The application displays questions parsed from a JSON file while the user is able to select answers using keyboard input. This was created for the [October 2020 Tandem Code Challenge](https://madeintandem.com/blog/software-engineering-apprenticeship-program-open-applications-monday-october-26/). 
 
+## Challenge Requirements
+- A round of trivia has 10 Questions
+- All questions are multiple-choice questions
+- Your score does not need to update in real time
+- Results can update on form submit, button click, or any interaction you choose
+- Trivia data such as the questions, correct and incorrect answers are provided via a JSON file.
+
 ## Challenge Criteria
 The goal is to create an application that displays trivia questions with multiple-choice answers to select from.
 - A user can view questions.
