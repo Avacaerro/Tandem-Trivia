@@ -46,7 +46,7 @@ chmod +x trivia
 - Modify game parameters (# of questions, point accumulation, # of rounds to play)
 
 ## Known Issues
-- Displaying all the questions is not static as the order is being randomized when a Question object is initialized.
+- Displaying all the questions is not static as the order is being randomized when a Question object is initialized. Holding the option button down will cycle the questions in varying order when displayed.
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/Avacaerro/Tandem-Trivia/blob/main/LICENSE) for details.
